@@ -1,39 +1,89 @@
 import { useState } from 'react';
 import '../styles/App.css';
-import Button from './Button';
+import '../styles/Button.css';
 
 const App = () => {
-  const handleButtonPress = () => {
-    console.log('handle');
-  };
+  const [value, setValue] = useState(0);
+  const [oldNumber, setOldNumber] = useState(0);
+  const [op, setOp] = useState(0);
+
+  function handlebuttonPress(ev) {
+    setOp(ev.target.value);
+  }
 
   return (
     <div className="App">
-      <div className="display">Resultado</div>
+      <div className="display">{op}</div>
       <div className="buttons">
-        <Button onButtonClick={handleButtonPress} content="C" type="function" />
-        <Button
-          onButtonClick={handleButtonPress}
-          content="+/-"
-          type="function"
-        />
-        <Button onButtonClick={handleButtonPress} content="%" type="function" />
-        <Button onButtonClick={handleButtonPress} content="÷" type="operator" />
-        <Button onButtonClick={handleButtonPress} content="7" />
-        <Button onButtonClick={handleButtonPress} content="8" />
-        <Button onButtonClick={handleButtonPress} content="9" />
-        <Button onButtonClick={handleButtonPress} content="×" type="operator" />
-        <Button onButtonClick={handleButtonPress} content="4" />
-        <Button onButtonClick={handleButtonPress} content="5" />
-        <Button onButtonClick={handleButtonPress} content="6" />
-        <Button onButtonClick={handleButtonPress} content="−" type="operator" />
-        <Button onButtonClick={handleButtonPress} content="1" />
-        <Button onButtonClick={handleButtonPress} content="2" />
-        <Button onButtonClick={handleButtonPress} content="3" />
-        <Button onButtonClick={handleButtonPress} content="+" type="operator" />
-        <Button onButtonClick={handleButtonPress} content="0" />
-        <Button onButtonClick={handleButtonPress} content="." />
-        <Button onButtonClick={handleButtonPress} content="=" type="operator" />
+        <button className="Button function">AC</button>
+        <button className="Button function">+/-</button>
+        <button className="Button function" onClick={handlebuttonPress}>
+          %
+        </button>
+        <button
+          className="Button operator"
+          onClick={handlebuttonPress}
+          value="/"
+        >
+          ÷
+        </button>
+        <button className="Button " onClick={handlebuttonPress} value="7">
+          7
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="8">
+          8
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="9">
+          9
+        </button>
+        <button
+          className="Button operator"
+          onClick={handlebuttonPress}
+          value="x"
+        >
+          x
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="4">
+          4
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="5">
+          5
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="6">
+          6
+        </button>
+        <button
+          className="Button operator"
+          onClick={handlebuttonPress}
+          value="-"
+        >
+          -
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="1">
+          1
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="2">
+          2
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value="3">
+          3
+        </button>
+        <button
+          className="Button operator"
+          onClick={handlebuttonPress}
+          value="+"
+        >
+          +
+        </button>
+        <button className="Button zero" onClick={handlebuttonPress} value="0">
+          0
+        </button>
+        <button className="Button" onClick={handlebuttonPress} value=",">
+          ,
+        </button>
+        <button className="Button operator" onClick={handlebuttonPress}>
+          =
+        </button>
       </div>
     </div>
   );
