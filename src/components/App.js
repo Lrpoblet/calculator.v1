@@ -7,12 +7,16 @@ const App = () => {
   const [oldNumber, setOldNumber] = useState(0);
   const [op, setOp] = useState(0);
 
+  function handleReset() {
+    setNumber(0);
+  }
+
   function handlePercent() {
     setNumber(number / 100);
   }
 
-  function handleReset() {
-    setNumber(0);
+  function changeSign() {
+    setNumber(number * -1);
   }
 
   function handlebuttonPress(ev) {
@@ -26,7 +30,9 @@ const App = () => {
         <button className="Button function" onClick={handleReset}>
           AC
         </button>
-        <button className="Button function">+/-</button>
+        <button className="Button function" onClick={changeSign}>
+          +/-
+        </button>
         <button className="Button function" onClick={handlePercent}>
           %
         </button>
