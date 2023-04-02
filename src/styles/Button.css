@@ -5,7 +5,7 @@
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  font-size: 30px;
+  font-size: 2em;
   justify-content: center;
   transition: filter 0.1s ease-in;
   padding: 5px;
