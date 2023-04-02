@@ -3,21 +3,31 @@ import '../styles/App.css';
 import '../styles/Button.css';
 
 const App = () => {
-  const [value, setValue] = useState(0);
+  const [number, setNumber] = useState(0);
   const [oldNumber, setOldNumber] = useState(0);
   const [op, setOp] = useState(0);
 
+  function handlePercent() {
+    setNumber(number / 100);
+  }
+
+  function handleReset() {
+    setNumber(0);
+  }
+
   function handlebuttonPress(ev) {
-    setOp(ev.target.value);
+    setNumber(ev.target.value);
   }
 
   return (
     <div className="App">
-      <div className="display">{op}</div>
+      <div className="display">{number}</div>
       <div className="buttons">
-        <button className="Button function">AC</button>
+        <button className="Button function" onClick={handleReset}>
+          AC
+        </button>
         <button className="Button function">+/-</button>
-        <button className="Button function" onClick={handlebuttonPress}>
+        <button className="Button function" onClick={handlePercent}>
           %
         </button>
         <button
