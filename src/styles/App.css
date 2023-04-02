@@ -1,49 +1,31 @@
-* {
+body {
   background-image: url(../images/background.png);
-  color: black;
-}
-
-.body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: center;
   justify-content: center;
-  height: 90vh;
-}
-
-.calc {
-  display: flex;
-  flex-direction: column;
   align-items: center;
 }
 
-.label {
-  margin: 10px;
-  font-size: 18px;
+* {
+  box-sizing: border-box;
 }
 
-.box {
-  text-align: center;
-  border: 1px solid black;
-  margin-left: 10px;
-  object-fit: contain;
-  width: 100px;
-  padding: 2px;
-}
-
-.result {
-  font-size: 22px;
-}
-
-.reset {
-  padding: 10px;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: 1px solid black;
-  border-radius: 20px;
-}
-
-.reset:hover {
+.App {
+  background: black;
+  border-radius: 50px;
   color: white;
-  border: 1px solid white;
+  padding: 20px;
+  width: fit-content;
+}
+
+.display {
+  font-size: 100px;
+  margin: 50px 20px 20px 20px;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
 }
