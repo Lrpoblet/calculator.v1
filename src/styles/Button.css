@@ -8,12 +8,12 @@
   height: 110px;
   justify-content: center;
   width: 110px;
-  transition: filter 0.3s ease-in;
+  transition: filter 0.1s ease-in;
 }
 
 .Button:active,
 .Button:focus {
-  filter: brightness(120%);
+  filter: brightness(150%);
 }
 
 .Button.zero {
