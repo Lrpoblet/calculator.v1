@@ -5,11 +5,10 @@
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  font-size: 45px;
-  height: 110px;
+  font-size: 30px;
   justify-content: center;
-  width: 110px;
   transition: filter 0.1s ease-in;
+  padding: 5px;
 }
 
 .Button:active,
@@ -18,7 +17,6 @@
 }
 
 .Button.zero {
-  width: 250px;
   grid-column: 1 / span 2;
   border-radius: 57.5px;
   position: relative;
