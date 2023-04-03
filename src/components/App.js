@@ -15,9 +15,14 @@ const App = () => {
   }
 
   function handlePercent() {
-    let result = currentNumber / 100;
+    let isNegative = currentNumber < 0;
+    let result = Math.abs(currentNumber) / 100;
     const strippedResult = roundAndStripZeros(result);
-    setCurrentNumber(strippedResult);
+    if (isNegative) {
+      setCurrentNumber(-1 * strippedResult);
+    } else {
+      setCurrentNumber(strippedResult);
+    }
   }
 
   function changeSign() {
