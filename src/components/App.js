@@ -14,7 +14,8 @@ const App = () => {
   }
 
   function handlePercent() {
-    setNumber(number / 100);
+    let result = number / 100;
+    setNumber(result.toFixed(4));
   }
 
   function changeSign() {
@@ -48,14 +49,20 @@ const App = () => {
   }
 
   function calc() {
+    let result;
     if (op === '+') {
-      setNumber(oldNumber + number);
+      result = oldNumber + number;
+      //redondeo hasta 4 decimales
+      setNumber(result.toFixed(4));
     } else if (op === '-') {
-      setNumber(oldNumber - number);
+      result = oldNumber - number;
+      setNumber(result.toFixed(4));
     } else if (op === 'x') {
-      setNumber(oldNumber * number);
+      result = oldNumber * number;
+      setNumber(result.toFixed(4));
     } else {
-      setNumber(oldNumber / number);
+      result = oldNumber / number;
+      setNumber(result.toFixed(4));
     }
     setOp('0');
   }
