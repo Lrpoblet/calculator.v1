@@ -46,6 +46,18 @@ const App = () => {
     }
   }
 
+  function calc() {
+    if (op === '+') {
+      setNumber(oldNumber + number);
+    } else if (op === '-') {
+      setNumber(oldNumber - number);
+    } else if (op === 'x') {
+      setNumber(oldNumber * number);
+    } else {
+      setNumber(oldNumber / number);
+    }
+  }
+
   return (
     <div className="App">
       <div className="display">{number}</div>
@@ -120,7 +132,7 @@ const App = () => {
         <button className="Button" onClick={handleButtonPress} value=".">
           ,
         </button>
-        <button className="Button operator" onClick={handleButtonPress}>
+        <button className="Button operator" onClick={calc}>
           =
         </button>
       </div>
