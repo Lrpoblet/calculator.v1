@@ -3,12 +3,12 @@ import '../styles/App.css';
 import '../styles/Button.css';
 
 const App = () => {
-  const [number, setNumber] = useState(0);
+  const [number, setNumber] = useState('0');
   const [oldNumber, setOldNumber] = useState(0);
   const [op, setOp] = useState(0);
 
   function handleReset() {
-    setNumber(0);
+    setNumber('0');
   }
 
   function handlePercent() {
@@ -19,8 +19,22 @@ const App = () => {
     setNumber(number * -1);
   }
 
-  function handlebuttonPress(ev) {
-    setNumber(ev.target.value);
+  function handleButtonPress(ev) {
+    // uso destructuring para extraer la propiedad value del objeto ev.target
+    const { value } = ev.target;
+    console.log(number);
+
+    if (number.length < 5) {
+      if (number === '0') {
+        setNumber(value);
+      } else if (!number.includes('.') || value !== '.') {
+        setNumber(number + value);
+      } else {
+        setNumber(number);
+      }
+    } else {
+      setNumber(number);
+    }
   }
 
   return (
@@ -38,66 +52,66 @@ const App = () => {
         </button>
         <button
           className="Button operator"
-          onClick={handlebuttonPress}
+          onClick={handleButtonPress}
           value="/"
         >
           ÷
         </button>
-        <button className="Button " onClick={handlebuttonPress} value="7">
+        <button className="Button " onClick={handleButtonPress} value="7">
           7
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="8">
+        <button className="Button" onClick={handleButtonPress} value="8">
           8
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="9">
+        <button className="Button" onClick={handleButtonPress} value="9">
           9
         </button>
         <button
           className="Button operator"
-          onClick={handlebuttonPress}
+          onClick={handleButtonPress}
           value="x"
         >
           x
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="4">
+        <button className="Button" onClick={handleButtonPress} value="4">
           4
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="5">
+        <button className="Button" onClick={handleButtonPress} value="5">
           5
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="6">
+        <button className="Button" onClick={handleButtonPress} value="6">
           6
         </button>
         <button
           className="Button operator"
-          onClick={handlebuttonPress}
+          onClick={handleButtonPress}
           value="-"
         >
           -
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="1">
+        <button className="Button" onClick={handleButtonPress} value="1">
           1
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="2">
+        <button className="Button" onClick={handleButtonPress} value="2">
           2
         </button>
-        <button className="Button" onClick={handlebuttonPress} value="3">
+        <button className="Button" onClick={handleButtonPress} value="3">
           3
         </button>
         <button
           className="Button operator"
-          onClick={handlebuttonPress}
+          onClick={handleButtonPress}
           value="+"
         >
           +
         </button>
-        <button className="Button zero" onClick={handlebuttonPress} value="0">
+        <button className="Button zero" onClick={handleButtonPress} value="0">
           0
         </button>
-        <button className="Button" onClick={handlebuttonPress} value=",">
+        <button className="Button" onClick={handleButtonPress} value=".">
           ,
         </button>
-        <button className="Button operator" onClick={handlebuttonPress}>
+        <button className="Button operator" onClick={handleButtonPress}>
           =
         </button>
       </div>
