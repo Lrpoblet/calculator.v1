@@ -4,11 +4,12 @@ import '../styles/Button.css';
 
 const App = () => {
   const [number, setNumber] = useState('0');
-  const [oldNumber, setOldNumber] = useState(0);
+  const [oldNumber, setOldNumber] = useState('0');
   const [op, setOp] = useState(0);
 
   function handleReset() {
     setNumber('0');
+    setOp('0');
   }
 
   function handlePercent() {
@@ -22,10 +23,18 @@ const App = () => {
   function handleButtonPress(ev) {
     // uso destructuring para extraer la propiedad value del objeto ev.target
     const { value } = ev.target;
-    console.log(number);
+    const operators = ['+', '-', 'x', '/'];
 
-    if (number.length < 5) {
-      if (number === '0') {
+    if (operators.includes(value)) {
+      setOp(value);
+      setOldNumber(number);
+      //pendiente mantener el numero antiguo en pantalla hasta introducir uno nuevo
+      setNumber('0');
+    } else if (number.length < 5 && /^[0-9]*\.?[0-9]*$/.test(value)) {
+      //limitado a 5 digitos para no deformar la calculadora, en futuras versiones hacer que se vayan haciendo más pequeños los núemros
+      //también está pendiente añadir el punto del mil
+
+      if (number === '0' && value !== '.') {
         setNumber(value);
       } else if (!number.includes('.') || value !== '.') {
         setNumber(number + value);
