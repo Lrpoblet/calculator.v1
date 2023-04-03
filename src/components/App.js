@@ -30,7 +30,6 @@ const App = () => {
     if (operators.includes(value)) {
       setOp(value);
       setOldNumber(number);
-      //pendiente mantener el numero antiguo en pantalla hasta introducir uno nuevo
       setNumber('0');
     } else if (number.length < 5 && /^[0-9]*\.?[0-9]*$/.test(value)) {
       //limitado a 5 digitos para no deformar la calculadora, en futuras versiones hacer que se vayan haciendo más pequeños los núemros
