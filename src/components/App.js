@@ -15,7 +15,9 @@ const App = () => {
 
   function handlePercent() {
     let result = number / 100;
-    setNumber(result.toFixed(4));
+    //redondea resultado a 4 decimales y elimina los ceros seguidos por el final de la cadena y los reemplaza por cadena vacía
+    let strippedResult = result.toFixed(4).replace(/\.?0+$/, '');
+    setNumber(strippedResult);
   }
 
   function changeSign() {
@@ -31,9 +33,10 @@ const App = () => {
       setOp(value);
       setOldNumber(number);
       setNumber('0');
+      //---> falta poder concatenar operaciones sin pulsar el =
     } else if (number.length < 5 && /^[0-9]*\.?[0-9]*$/.test(value)) {
-      //limitado a 5 digitos para no deformar la calculadora, en futuras versiones hacer que se vayan haciendo más pequeños los núemros
-      //también está pendiente añadir el punto del mil
+      //---> limitado a 5 digitos para no deformar la calculadora, en futuras versiones hacer que se vayan haciendo más pequeños los núemros
+      //---> también está pendiente añadir el punto del mil
 
       if (number === '0' && value !== '.') {
         setNumber(value);
@@ -58,19 +61,16 @@ const App = () => {
     } else {
       result = oldNumber / number;
     }
+    //para redondear a 4 decimales
+    let roundedResult = Math.abs(result).toFixed(4);
+    //para eliminar los ceros no significativos en el decimal
+    let strippedResult = roundedResult.replace(/\.?0+$/, '');
 
-    // obtener el valor absoluto del resultado
-    let absResult = Math.abs(result);
-    //  para asegurarse de que el resultado solo se redondee a 4 decimales si tiene decimales, y no se redondee si es un número entero.
-    if (Math.floor(absResult) !== absResult && absResult % 0.0001 !== 0) {
-      result = absResult.toFixed(4);
-      if (result < 0) {
-        // si el resultado original era negativo, multiplicar por -1 para obtener el resultado negativo redondeado correctamente
-        result = -1 * result;
-      }
+    if (result < 0) {
+      strippedResult = '-' + strippedResult;
     }
 
-    setNumber(result);
+    setNumber(strippedResult);
     setOp('0');
   }
 
