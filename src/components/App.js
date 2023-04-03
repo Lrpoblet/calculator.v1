@@ -49,12 +49,18 @@ const App = () => {
       value === '/'
     ) {
       if (operator) {
-        //si ya hay un operador, evaluo la expresion y lo pong como numero previo
-        const expression = `${previousNumber} ${operator} ${currentNumber}`;
-        const result = eval(expression);
-        const strippedResult = roundAndStripZeros(result);
-        setPreviousNumber(strippedResult);
-        setCurrentNumber('0');
+        try {
+          //si ya hay un operador, evaluo la expresion y lo pong como numero previo
+          const expression = `${previousNumber} ${operator} ${currentNumber}`;
+          const result = eval(expression);
+          const strippedResult = roundAndStripZeros(result);
+          setPreviousNumber(strippedResult);
+          setCurrentNumber('0');
+        } catch (err) {
+          //para manejar error y en caso de que se produzca un error en eval la calculadora se resetee
+          handleReset();
+          setCurrentNumber('Error');
+        }
       } else {
         //si no hay otro operador lo pongo como numero previo y reinicio el numero actual para esperar la operacion
         setPreviousNumber(currentNumber);
