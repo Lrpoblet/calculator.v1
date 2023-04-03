@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { roundAndStripZeros } from './utils';
 import '../styles/App.css';
 import '../styles/Button.css';
+import Display from './Display';
+import Button from './Button';
 
 const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
@@ -88,85 +90,14 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="oldNumber">{previousNumber}</div>
-      <div className={currentNumber.length < 6 ? 'display' : 'display-small'}>
-        {currentNumber}
-      </div>
-      <div className="buttons">
-        <button className="Button function" onClick={handleReset}>
-          AC
-        </button>
-        <button className="Button function" onClick={changeSign}>
-          +/-
-        </button>
-        <button className="Button function" onClick={handlePercent}>
-          %
-        </button>
-        <button
-          className="Button operator"
-          onClick={handleButtonPress}
-          value="/"
-        >
-          ÷
-        </button>
-        <button className="Button " onClick={handleButtonPress} value="7">
-          7
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="8">
-          8
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="9">
-          9
-        </button>
-        <button
-          className="Button operator"
-          onClick={handleButtonPress}
-          value="*"
-        >
-          x
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="4">
-          4
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="5">
-          5
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="6">
-          6
-        </button>
-        <button
-          className="Button operator"
-          onClick={handleButtonPress}
-          value="-"
-        >
-          -
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="1">
-          1
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="2">
-          2
-        </button>
-        <button className="Button" onClick={handleButtonPress} value="3">
-          3
-        </button>
-        <button
-          className="Button operator"
-          onClick={handleButtonPress}
-          value="+"
-        >
-          +
-        </button>
-        <button className="Button zero" onClick={handleButtonPress} value="0">
-          0
-        </button>
-        <button className="Button" onClick={handleButtonPress} value=".">
-          ,
-        </button>
-        <button className="Button operator" onClick={calc}>
-          =
-        </button>
-      </div>
+      <Display previousNumber={previousNumber} currentNumber={currentNumber} />
+      <Button
+        handleReset={handleReset}
+        changeSign={changeSign}
+        handlePercent={handlePercent}
+        handleButtonPress={handleButtonPress}
+        calc={calc}
+      />
     </div>
   );
 };
