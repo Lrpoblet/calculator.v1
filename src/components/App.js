@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { roundAndStripZeros } from './utils';
 import '../styles/App.css';
 import '../styles/Button.css';
 
@@ -6,12 +7,6 @@ const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
   const [previousNumber, setPreviousNumber] = useState('0');
   const [operator, setOperator] = useState(null);
-
-  //redondea resultado a 4 decimales y elimina los ceros seguidos por el final de la cadena y los reemplaza por cadena vacía
-  function roundAndStripZeros(number) {
-    const rounded = Math.abs(number).toFixed(4);
-    return rounded.replace(/\.?0+$/, '');
-  }
 
   function handleReset() {
     setCurrentNumber('0');
@@ -89,7 +84,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="oldNumber">{previousNumber}</div>
-      <div className={currentNumber.length < 5 ? 'display' : 'display-small'}>
+      <div className={currentNumber.length < 6 ? 'display' : 'display-small'}>
         {currentNumber}
       </div>
       <div className="buttons">
