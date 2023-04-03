@@ -37,7 +37,7 @@ const App = () => {
     if (/^[0-9]*\.?[0-9]*$/.test(value)) {
       if (currentNumber === '0' && value !== '.') {
         setCurrentNumber(value);
-      } else if (currentNumber.length < 5) {
+      } else if (currentNumber.length < 8) {
         setCurrentNumber((prevNumber) => prevNumber + value);
       }
     } else if (
@@ -89,7 +89,9 @@ const App = () => {
   return (
     <div className="App">
       <div className="oldNumber">{previousNumber}</div>
-      <div className="display">{currentNumber}</div>
+      <div className={currentNumber.length < 5 ? 'display' : 'display-small'}>
+        {currentNumber}
+      </div>
       <div className="buttons">
         <button className="Button function" onClick={handleReset}>
           AC
