@@ -28,7 +28,10 @@ const App = () => {
   }
 
   function changeSign() {
-    setCurrentNumber((prevNumber) => prevNumber * -1);
+    setCurrentNumber((prevNumber) => {
+      const newNumber = prevNumber * -1;
+      return newNumber;
+    });
   }
 
   const handleButtonPress = (ev) => {
@@ -78,13 +81,19 @@ const App = () => {
       result = parseFloat(previousNumber) - parseFloat(currentNumber);
     } else if (operator === '*') {
       result = parseFloat(previousNumber) * parseFloat(currentNumber);
-    } else {
-      result = parseFloat(previousNumber) / parseFloat(currentNumber);
+    } else if (operator === '/') {
+      //incluido error si se intenta dividir entre 0
+      if (parseFloat(currentNumber) === 0) {
+        setCurrentNumber('Error');
+        setOperator(null);
+        setPreviousNumber('0');
+        return;
+      } else {
+        result = parseFloat(previousNumber) / parseFloat(currentNumber);
+      }
     }
-    //para redondear a 4 decimales
-    let roundedResult = Math.abs(result).toFixed(4);
-    //para eliminar los ceros no significativos en el decimal
-    let strippedResult = roundedResult.replace(/\.?0+$/, '');
+
+    let strippedResult = roundAndStripZeros(result);
 
     if (result < 0) {
       strippedResult = '-' + strippedResult;
