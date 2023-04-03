@@ -10,6 +10,7 @@ const App = () => {
   function handleReset() {
     setNumber('0');
     setOp('0');
+    setOldNumber('0');
   }
 
   function handlePercent() {
@@ -56,6 +57,7 @@ const App = () => {
     } else {
       setNumber(oldNumber / number);
     }
+    setOp('0');
   }
 
   return (
