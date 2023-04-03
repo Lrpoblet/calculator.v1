@@ -3,63 +3,75 @@ import '../styles/App.css';
 import '../styles/Button.css';
 
 const App = () => {
-  const [number, setNumber] = useState('0');
-  const [oldNumber, setOldNumber] = useState('0');
-  const [op, setOp] = useState(0);
+  const [currentNumber, setCurrentNumber] = useState('0');
+  const [previousNumber, setPreviousNumber] = useState('0');
+  const [operator, setOperator] = useState(null);
+
+  //redondea resultado a 4 decimales y elimina los ceros seguidos por el final de la cadena y los reemplaza por cadena vacía
+  function roundAndStripZeros(number) {
+    const rounded = Math.abs(number).toFixed(4);
+    return rounded.replace(/\.?0+$/, '');
+  }
 
   function handleReset() {
-    setNumber('0');
-    setOp('0');
-    setOldNumber('0');
+    setCurrentNumber('0');
+    setOperator(null);
+    setPreviousNumber('0');
   }
 
   function handlePercent() {
-    let result = number / 100;
-    //redondea resultado a 4 decimales y elimina los ceros seguidos por el final de la cadena y los reemplaza por cadena vacía
-    let strippedResult = result.toFixed(4).replace(/\.?0+$/, '');
-    setNumber(strippedResult);
+    let result = currentNumber / 100;
+    const strippedResult = roundAndStripZeros(result);
+    setCurrentNumber(strippedResult);
   }
 
   function changeSign() {
-    setNumber(number * -1);
+    setCurrentNumber((prevNumber) => prevNumber * -1);
   }
 
-  function handleButtonPress(ev) {
-    // uso destructuring para extraer la propiedad value del objeto ev.target
+  const handleButtonPress = (ev) => {
+    //destructuring para coger el value de event.target
     const { value } = ev.target;
-    const operators = ['+', '-', 'x', '/'];
 
-    if (operators.includes(value)) {
-      setOp(value);
-      setOldNumber(number);
-      setNumber('0');
-      //---> falta poder concatenar operaciones sin pulsar el =
-    } else if (number.length < 5 && /^[0-9]*\.?[0-9]*$/.test(value)) {
-      //---> limitado a 5 digitos para no deformar la calculadora, en futuras versiones hacer que se vayan haciendo más pequeños los núemros
-      //---> también está pendiente añadir el punto del mil
-
-      if (number === '0' && value !== '.') {
-        setNumber(value);
-      } else if (!number.includes('.') || value !== '.') {
-        setNumber(number + value);
-      } else {
-        setNumber(number);
+    //compruebo si el valor es un numero o punto decimal
+    if (/^[0-9]*\.?[0-9]*$/.test(value)) {
+      if (currentNumber === '0' && value !== '.') {
+        setCurrentNumber(value);
+      } else if (currentNumber.length < 5) {
+        setCurrentNumber((prevNumber) => prevNumber + value);
       }
-    } else {
-      setNumber(number);
+    } else if (
+      value === '+' ||
+      value === '-' ||
+      value === '*' ||
+      value === '/'
+    ) {
+      if (operator) {
+        //si ya hay un operador, evaluo la expresion y lo pong como numero previo
+        const expression = `${previousNumber} ${operator} ${currentNumber}`;
+        const result = eval(expression);
+        const strippedResult = roundAndStripZeros(result);
+        setPreviousNumber(strippedResult);
+        setCurrentNumber('0');
+      } else {
+        //si no hay otro operador lo pongo como numero previo y reinicio el numero actual para esperar la operacion
+        setPreviousNumber(currentNumber);
+        setCurrentNumber('0');
+      }
+      setOperator(value);
     }
-  }
+  };
 
   function calc() {
     let result;
-    if (op === '+') {
-      result = oldNumber + number;
-    } else if (op === '-') {
-      result = oldNumber - number;
-    } else if (op === 'x') {
-      result = oldNumber * number;
+    if (operator === '+') {
+      result = parseFloat(previousNumber) + parseFloat(currentNumber);
+    } else if (operator === '-') {
+      result = parseFloat(previousNumber) - parseFloat(currentNumber);
+    } else if (operator === '*') {
+      result = parseFloat(previousNumber) * parseFloat(currentNumber);
     } else {
-      result = oldNumber / number;
+      result = parseFloat(previousNumber) / parseFloat(currentNumber);
     }
     //para redondear a 4 decimales
     let roundedResult = Math.abs(result).toFixed(4);
@@ -70,14 +82,14 @@ const App = () => {
       strippedResult = '-' + strippedResult;
     }
 
-    setNumber(strippedResult);
-    setOp('0');
+    setCurrentNumber(strippedResult);
+    setOperator(null);
   }
 
   return (
     <div className="App">
-      <div className="oldNumber">{oldNumber}</div>
-      <div className="display">{number}</div>
+      <div className="oldNumber">{previousNumber}</div>
+      <div className="display">{currentNumber}</div>
       <div className="buttons">
         <button className="Button function" onClick={handleReset}>
           AC
@@ -107,7 +119,7 @@ const App = () => {
         <button
           className="Button operator"
           onClick={handleButtonPress}
-          value="x"
+          value="*"
         >
           x
         </button>
