@@ -52,23 +52,32 @@ const App = () => {
     let result;
     if (op === '+') {
       result = oldNumber + number;
-      //redondeo hasta 4 decimales
-      setNumber(result.toFixed(4));
     } else if (op === '-') {
       result = oldNumber - number;
-      setNumber(result.toFixed(4));
     } else if (op === 'x') {
       result = oldNumber * number;
-      setNumber(result.toFixed(4));
     } else {
       result = oldNumber / number;
-      setNumber(result.toFixed(4));
     }
+
+    // obtener el valor absoluto del resultado
+    let absResult = Math.abs(result);
+    //  para asegurarse de que el resultado solo se redondee a 4 decimales si tiene decimales, y no se redondee si es un número entero.
+    if (Math.floor(absResult) !== absResult && absResult % 0.0001 !== 0) {
+      result = absResult.toFixed(4);
+      if (result < 0) {
+        // si el resultado original era negativo, multiplicar por -1 para obtener el resultado negativo redondeado correctamente
+        result = -1 * result;
+      }
+    }
+
+    setNumber(result);
     setOp('0');
   }
 
   return (
     <div className="App">
+      <div className="oldNumber">{oldNumber}</div>
       <div className="display">{number}</div>
       <div className="buttons">
         <button className="Button function" onClick={handleReset}>

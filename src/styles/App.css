@@ -18,7 +18,13 @@ body {
 
 .display {
   font-size: 100px;
-  margin: 50px 20px 20px 20px;
+  margin: 20px;
+  text-align: right;
+}
+
+.oldNumber {
+  font-size: 50px;
+  margin: 20px;
   text-align: right;
 }
 
