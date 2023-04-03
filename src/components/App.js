@@ -42,7 +42,11 @@ const App = () => {
     if (/^[0-9]*\.?[0-9]*$/.test(value)) {
       if (currentNumber === '0' && value !== '.') {
         setCurrentNumber(value);
-      } else if (currentNumber.length < 8) {
+      } else if (
+        //compruebo si ya hay algun decimal
+        (currentNumber.indexOf('.') === -1 || value !== '.') &&
+        currentNumber.length < 8
+      ) {
         setCurrentNumber((prevNumber) => prevNumber + value);
       }
     } else if (
