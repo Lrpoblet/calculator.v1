@@ -74,8 +74,6 @@ const App = () => {
         setCurrentNumber('0');
       }
       setOperator(value);
-    } else {
-      setOperator(value);
     }
   };
 
