@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className="footer">
       <small>
-        &copy; 2023
+        &copy; 2023&#128030;
         <a
           href="https://lrpoblet.github.io/lara-ramos-poblet/"
           title="portfolio"
