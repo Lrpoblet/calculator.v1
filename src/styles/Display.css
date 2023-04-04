@@ -1,0 +1,17 @@
+.display {
+  font-size: 5em;
+  margin: 20px;
+  text-align: right;
+}
+
+.display-small {
+  font-size: 4em;
+  margin: 29px 20px;
+  text-align: right;
+}
+
+.oldNumber {
+  font-size: 3em;
+  margin: 10px 20px;
+  text-align: right;
+}

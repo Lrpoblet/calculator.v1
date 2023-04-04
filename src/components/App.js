@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { roundAndStripZeros } from './utils';
 import '../styles/App.css';
-import '../styles/Button.css';
 import Display from './Display';
 import Button from './Button';
+import Footer from './Footer';
 
 const App = () => {
   const [currentNumber, setCurrentNumber] = useState('0');
@@ -114,14 +114,20 @@ const App = () => {
 
   return (
     <div className="App">
-      <Display previousNumber={previousNumber} currentNumber={currentNumber} />
-      <Button
-        handleReset={handleReset}
-        changeSign={changeSign}
-        handlePercent={handlePercent}
-        handleButtonPress={handleButtonPress}
-        calc={calc}
-      />
+      <div className="calc">
+        <Display
+          previousNumber={previousNumber}
+          currentNumber={currentNumber}
+        />
+        <Button
+          handleReset={handleReset}
+          changeSign={changeSign}
+          handlePercent={handlePercent}
+          handleButtonPress={handleButtonPress}
+          calc={calc}
+        />
+      </div>
+      <Footer />
     </div>
   );
 };
