@@ -74,6 +74,8 @@ const App = () => {
         setCurrentNumber('0');
       }
       setOperator(value);
+    } else {
+      setOperator(value);
     }
   };
 
@@ -101,6 +103,11 @@ const App = () => {
 
     if (result < 0) {
       strippedResult = '-' + strippedResult;
+    }
+
+    //para evitar que al darle igual salga NaN
+    if (result === undefined) {
+      strippedResult = currentNumber;
     }
 
     setCurrentNumber(strippedResult);
